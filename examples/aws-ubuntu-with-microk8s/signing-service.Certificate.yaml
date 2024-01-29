@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: signing-service-signing
+  namespace: pspdfkit
+spec:
+  commonName: signing-service.pspdfkit.svc.cluster.local
+  secretName: signing-service-signing-tls
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - "signing-service"
+    - "signing-service.pspdfkit"
+    - "signing-service.pspdfkit.svc.cluster.local"

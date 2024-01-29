@@ -1,0 +1,27 @@
+region: ${aws_region}
+
+vpcId: ${vpc_id}
+
+clusterName: ${cluster_name}
+
+defaultTargetType: ip
+
+enablePodReadinessGateInject: true
+
+syncPeriod: 2h0m0s
+
+ingressClassConfig:
+    default: false
+
+serviceAccount:
+  create: true
+  name: ${service_account_name}
+  annotations: 
+    eks.amazonaws.com/role-arn: ${service_account_role_arn}
+
+defaultTags: 
+  ${default_tags}
+
+podAnnotations:
+  checksum/values-template: ${checksum_values}
+  checksum/code: ${checksum_code}

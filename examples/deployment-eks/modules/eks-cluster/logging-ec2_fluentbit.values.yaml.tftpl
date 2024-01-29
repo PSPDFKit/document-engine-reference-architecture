@@ -1,0 +1,37 @@
+tolerations:
+  - operator: Exists
+priorityClassName: system-node-critical
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: eks.amazonaws.com/compute-type
+              operator: NotIn
+              values:
+                - fargate
+              
+cloudWatchLogs:
+  enabled: true
+  region: ${aws_region}
+  logRetentionDays: ${log_retention_days}
+  logGroupTemplate: "${log_group_prefix}/$kubernetes['namespace_name']"
+  logStreamTemplate: "$kubernetes['pod_name'].$kubernetes['container_name']"
+  logKey: "log"
+
+service:
+  extraParsers: |
+    [PARSER]
+      Name crio
+      Format Regex
+      Regex ^(?<time>[^ ]+) (?<stream>stdout|stderr) (?<logtag>P|F) (?<log>.*)$
+      Time_Key    time
+      Time_Format %Y-%m-%dT%H:%M:%S.%L%z
+
+input:
+    parser: crio
+
+annotations:
+  checksum/values-template: ${checksum_values}
+  checksum/code: ${checksum_code}
