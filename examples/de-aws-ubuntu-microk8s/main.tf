@@ -52,8 +52,8 @@ resource "aws_instance" "vm" {
   user_data = templatefile(
     "${path.module}/vm_userdata.sh",
     {
-      aws_region             = local.aws_region_name
-      init_script_content    = file("${path.module}/document-engine_setup.sh")
+      aws_region                  = local.aws_region_name
+      init_script_content         = file("${path.module}/document-engine_setup.sh")
       signing_service_certificate = file("${path.module}/signing-service.Certificate.yaml")
     }
   )

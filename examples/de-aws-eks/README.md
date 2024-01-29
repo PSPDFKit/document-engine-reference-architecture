@@ -1,6 +1,6 @@
-# Document Engine Reference Architecture — AWS EKS deployment
+# Document Engine example — setting up AWS EKS Kubernetes cluster and deploying Document Engine
 
-- [Document Engine Reference Architecture — AWS EKS deployment](#document-engine-reference-architecture--aws-eks-deployment)
+- [Document Engine example — setting up AWS EKS Kubernetes cluster and deploying Document Engine](#document-engine-example--setting-up-aws-eks-kubernetes-cluster-and-deploying-document-engine)
   - [Prerequisites](#prerequisites)
     - [Tools](#tools)
     - [Resources](#resources)
