@@ -13,17 +13,14 @@ locals {
 }
 
 module "cluster_eks" {
-  source = "terraform-aws-modules/eks/aws"
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 20"
 
-  cluster_name                   = var.cluster_name
-  cluster_version                = var.cluster_version
-  cluster_endpoint_public_access = var.cluster_endpoint_public_access
-
-  create_kms_key            = true
-  manage_aws_auth_configmap = true
-  aws_auth_accounts         = []
-  aws_auth_users            = []
-  aws_auth_roles            = []
+  cluster_name                             = var.cluster_name
+  cluster_version                          = var.cluster_version
+  cluster_endpoint_public_access           = var.cluster_endpoint_public_access
+  enable_cluster_creator_admin_permissions = true
+  create_kms_key                           = true
 
   cluster_addons = {
     kube-proxy = { most_recent = true }

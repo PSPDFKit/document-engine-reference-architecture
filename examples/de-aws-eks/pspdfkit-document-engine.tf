@@ -1,4 +1,6 @@
 resource "kubernetes_namespace" "document_engine" {
+  depends_on = [module.kubernetes_cluster]
+
   metadata {
     name = var.document_engine.namespace_name
     labels = {

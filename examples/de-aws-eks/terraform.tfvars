@@ -5,7 +5,7 @@ document_engine = {
   logging_level      = "debug"
   namespace_name     = "pspdfkit-document-engine"
   helm_release_name  = "document-engine"
-  helm_chart_version = ">0.1.10"
+  helm_chart_version = "" # get the latest
 }
 
 # AWS
@@ -30,7 +30,6 @@ cluster_nodes_count       = 1
 
 # Versions
 
-cluster_version                                 = "1.28"
+cluster_version                                 = "1.29"
 aws_for_fluent_bit_helm_chart_version           = "0.1.32"
-aws_load_balancer_controller_helm_chart_version = "1.6.1"
-
+aws_load_balancer_controller_helm_chart_version = "1.7.1"
