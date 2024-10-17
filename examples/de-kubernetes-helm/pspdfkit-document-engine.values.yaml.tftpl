@@ -50,10 +50,8 @@ database:
     host: ${db_host}
     port: 5432
     database: ${db_name}
-    username: pspdfkit
-    password: pspdfkit
-    adminUsername: pspdfkit
-    adminPassword: pspdfkit
+    username: postgres
+    password: ${db_postgres_password}
     tls: 
       enabled: false
       verify: false
@@ -118,33 +116,16 @@ prometheusExport:
 postgresql:
   enabled: true
   architecture: standalone
+  volumePermissions:
+    enabled: true
   auth:
+    enablePostgresUser: true
     postgresPassword: ${db_postgres_password}
     username: pspdfkit
     password: pspdfkit
     database: ${db_name}
-  primary:
-    persistence:
-      enabled: true
-      size: 512Mi
-      storageClass: standard
-      accessModes:
-        - ReadWriteOnce
-  volumePermissions:
-    enabled: true
-  tls: 
+  tls:
     enabled: false
-
-# postgresql:
-#   enabled: true
-#   architecture: standalone
-#   auth:
-#     postgresPassword: ${db_postgres_password}
-#     username: pspdfkit
-#     password: pspdfkit
-#     database: ${db_name}
-#   tls:
-#     enabled: false
 
 redis: 
   enabled: false

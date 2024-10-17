@@ -59,7 +59,9 @@ database:
     adminPassword: ${db_password}
     tls:
       enabled: true
-      verify: false
+      verify: true
+      hostVerify: true
+      trustFileName: ${rds_ca_path}
   migrationJob:
     enabled: false
 
@@ -100,6 +102,14 @@ topologySpreadConstraints:
     matchLabelKeys:
       - pod-template-hash
 
+certificateTrust: 
+  customCertificates: 
+    - name: ${rds_ca_config_map}
+      path: ${rds_ca_path}
+      configMap: 
+        name: ${rds_ca_config_map}
+        key: ca
+        
 prometheusExporter:
   enabled: true
 

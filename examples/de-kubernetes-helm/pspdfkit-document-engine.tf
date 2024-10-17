@@ -21,7 +21,7 @@ resource "helm_release" "document_engine" {
         db_name              = "pspdfkit"
         db_postgres_password = "despair"
         release_name         = var.document_engine.helm_release_name
-        jwt_public_key  = file("${path.module}/jwt-public-key.pem")
+        jwt_public_key       = file("${path.module}/JWT_PUBLIC_KEY.pem")
         checksum_values      = filemd5("${path.module}/pspdfkit-document-engine.values.yaml.tftpl")
         checksum_code        = filemd5("${path.module}/pspdfkit-document-engine.tf")
       }
