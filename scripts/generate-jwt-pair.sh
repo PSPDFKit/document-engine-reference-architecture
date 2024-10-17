@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 PUBLIC_KEY_NAME=JWT_PUBLIC_KEY.pem
 PRIVATE_KEY_NAME=JWT_PRIVATE_KEY.key
 
