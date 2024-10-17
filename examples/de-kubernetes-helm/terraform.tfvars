@@ -11,5 +11,5 @@ document_engine = {
   logging_level      = "debug"
   namespace_name     = "pspdfkit-document-engine"
   helm_release_name  = "document-engine"
-  helm_chart_version = ">0.1.10"
+  helm_chart_version = ">3.2.0"
 }

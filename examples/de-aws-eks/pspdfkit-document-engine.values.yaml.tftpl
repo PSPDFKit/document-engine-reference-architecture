@@ -1,73 +1,75 @@
-pspdfkit:
+documentEngineLicense:
+  activationKey: "${activation_key}"
 
-  license:
-    activationKey: ${activation_key}
+apiAuth:
+  apiToken: secret
+  # externalSecret:
+  #   name: secret
+  # API_AUTH_TOKEN can be used isntead of JWT
+  jwt:
+    enabled: false
+    publicKey: "${jwt_public_key}"
+    # Supported algorithms: RS256, RS512, ES256, ES512. See RFC 7518 for details about specific algorithms.
+    algorithm: RS256
 
+dashboard:
+  enabled: true
   auth:
-    api:
-      createSecret: true
-      apiToken: secret
-      # externalSecretName: secret-name
-    # API_AUTH_TOKEN can be used isntead of JWT
-      jwt:
-        enabled: false
-        publicKey: kwa
-      # Supported algorithms: RS256, RS512, ES256, ES512. See RFC 7518 for details about specific algorithms.
-        algorithm: RS256
-    dashboard:
-      createSecret: true
-      username: admin
-      password: admin
-      # externalSecretName: secret-name
+    username: admin
+    password: admin
+  # externalSecret:
+  #   name: ""
 
+observability:
   log:
     level: ${log_level}
 
-  signingService:
-    enabled: false
-#    enabled: true
-#    url: {{ .Values.signingService.url }}
-#    timeoutSeconds: {{ .Values.signingService.timeoutSeconds }}
-#    defaultSignerName: {{ .Values.signingService.defaultSignerName }}
-#    defaultSignatureReason: {{ .Values.signingService.defaultSignatureReason }}
-#    defaultSignatureLocation: {{ .Values.signingService.defaultSignatureLocation }}
-#    digitalSignatureHashAlgorithm: {{ .Values.signingService.digitalSignatureHashAlgorithm }}
-#    digitalSignatureCertificateCheckTime: {{ .Values.signingService.digitalSignatureCertificateCheckTime }}
+certificateTrust: 
+  customCertificates: []
 
+documentSigningService:
+  enabled: false
+# url: {{ .Values.signingService.url }}
+# timeoutSeconds: {{ .Values.signingService.timeoutSeconds }}
+# defaultSignerName: {{ .Values.signingService.defaultSignerName }}
+# defaultSignatureReason: {{ .Values.signingService.defaultSignatureReason }}
+# defaultSignatureLocation: {{ .Values.signingService.defaultSignatureLocation }}
+# digitalSignatureHashAlgorithm: {{ .Values.signingService.digitalSignatureHashAlgorithm }}
+# digitalSignatureCertificateCheckTime: {{ .Values.signingService.digitalSignatureCertificateCheckTime }}
+
+config:
   trustedProxies: default
 
-  storage:
-    enableMigrationJobs: false
+assetStorage:
+  backendType: built-in
+  backendFallback:
+    enabled: false
 
-    databaseEngine: postgresql
-    assetStorageBackend: built-in
-    enableAssetStorageFallback: false
-
-    postgres:
-      host: ${db_host}
-      port: ${db_port}
-      database: ${db_name}
-
-      tls:
-        enabled: true
-      auth: 
-        createSecret: true
-        username: ${db_username}
-        password: ${db_password}
-        adminUsername: ${db_username}
-        adminPassword: ${db_password}
-
-    s3:
-      bucket: "server-assets"
-      region: "us-east-1"
+database:
+  enabled: true
+  engine: postgres
+  connections: 20
+  postgres: 
+    host: ${db_host}
+    port: ${db_port}
+    database: ${db_name}
+    username: ${db_username}
+    password: ${db_password}
+    adminUsername: ${db_username}
+    adminPassword: ${db_password}
+    tls:
+      enabled: true
+      verify: false
+  migrationJob:
+    enabled: false
 
 service:
   port: 80
 
 ingress:
   enabled: true
+  className: alb
   annotations:
-    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
   hosts:
     - paths:
