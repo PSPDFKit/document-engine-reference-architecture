@@ -52,3 +52,7 @@ terraform.rc
 
 # SSH
 id_ed25519*
+
+# JWT Keys
+JWT_PRIVATE_KEY.key
+JWT_PUBLIC_KEY.pem

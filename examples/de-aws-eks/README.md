@@ -38,13 +38,13 @@ You will need an AWS account, and a [profile set for it](https://docs.aws.amazon
 You can use the AWS CLI to set this up by running `aws configure --profile document-engine-example`. After running this command, the configuration wizard will guide you through setting up the profile. 
 
 Or you can manually edit the `~/.aws/*` configuration files. 
-This entails something like this in `~/.aws/config`:
+This entails something like this in `~/.aws/credentials`:
 
 
 ```
 [document-engine-example]
 aws_access_key_id = ...
-aws_secret_access_key = ...
+aws_secret_access_ke = ...
 ```
 
 ## Setup
@@ -55,7 +55,7 @@ Prepare Terraform environment by setting the AWS profile and (optionally) region
 
 ```shell
 export TF_VAR_aws_profile_name="document-engine-example"
-export TF_VAR_aws_region="eu-north-1"
+export TF_VAR_aws_region="eu-north-1" # Remove or change the default in `terraform.tfvars` file if setting this variable
 ```
 
 Alternatively, prepare to provide AWS profile name for interactive input during the following commands. 
@@ -66,7 +66,15 @@ Put dependencies in place:
 terraform init -upgrade
 ```
 
-Examine the plan and apply it:
+Next, generate a JWT key pair using the `generate-jwt-pair.sh` script
+
+```shell
+# Run from within examples/de-aws-eks
+
+../../scripts/generate-jwt-pair.sh
+```
+
+Finally, examine the plan and apply it:
 
 ```shell
 terraform plan

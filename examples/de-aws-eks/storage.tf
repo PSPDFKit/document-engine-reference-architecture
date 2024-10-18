@@ -9,7 +9,7 @@ module "document_engine_storage" {
   cluster_info     = module.kubernetes_cluster.cluster_info
   cluster_vpc_info = module.kubernetes_cluster.cluster_vpc_info
   database_properties = {
-    identifier                   = "docengine"
+    identifier                   = "docengine-eks-example"
     username                     = "pspdfkit"
     db_name                      = local.document_engine_db_name
     ec2_instance_type            = "db.t3.micro"

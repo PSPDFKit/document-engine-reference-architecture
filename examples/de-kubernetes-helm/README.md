@@ -51,7 +51,15 @@ export TF_VAR_document_engine_hostname="document-engine.pspdfkit.local"
 > [!NOTE]
 > Unless you have condifured DNS resolution for the hostname, it will require manual override in the local resolver to access.
 
-Examine the plan and apply it:
+Next, generate a JWT key pair using the `generate-jwt-pair.sh` script
+
+```shell
+# Run from within examples/de-kubernetes-helm
+
+../../scripts/generate-jwt-pair.sh
+```
+
+Finally, examine the plan and apply it:
 
 ```shell
 terraform plan
