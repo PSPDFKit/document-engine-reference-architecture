@@ -21,7 +21,7 @@ The resources deployed will include:
  * [AWS Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) cluster as Kubernetes platform
    * Addons to integrate Amazon resources for logging and load balancing
  * PostgreSQL database running on [AWS Relational Database Service](https://aws.amazon.com/rds/)
- * [PSPDFKit Document Engine](https://pspdfkit.com/guides/document-engine/)
+ * [Nutrient Document Engine](https://www.nutrient.io/guides/document-engine/)
 
 ## Prerequisites
 
@@ -129,7 +129,6 @@ This software is licensed under a [modified BSD license](LICENSE).
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://pspdfkit.com/support/request/
+Nutrient offers support via https://support.nutrient.io/hc/en-us/requests/new
 
-Are you [evaluating our SDK](https://pspdfkit.com/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://pspdfkit.com/sales/
-
+Are you [evaluating our SDK](https://www.nutrient.io/sdk/try)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/contact-sales?=sdk
