@@ -10,7 +10,7 @@ data "aws_caller_identity" "current" {}
 data "aws_default_tags" "current" {}
 
 locals {
-  aws_region_name = data.aws_region.current.name
+  aws_region_name = data.aws_region.current.id
   aws_account_id  = data.aws_caller_identity.current.account_id
   default_tags    = data.aws_default_tags.current.tags
 

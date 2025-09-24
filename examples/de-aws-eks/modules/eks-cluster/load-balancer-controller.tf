@@ -10,9 +10,10 @@ locals {
 }
 
 module "load_balancer_controller_irsa_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.0"
 
-  role_name                              = "${var.cluster_name}-AmazonEKS-LoadBalancerController-Role"
+  name                                   = "${var.cluster_name}-AmazonEKS-LoadBalancerController-Role"
   attach_load_balancer_controller_policy = true
 
   oidc_providers = {
@@ -39,7 +40,7 @@ resource "helm_release" "aws-load-balancer-controller" {
   values = [
     templatefile("${path.module}/load-balancer-controller.values.yaml.tftpl", {
       service_account_name     = local.load_balancer_controller_service_account_name
-      service_account_role_arn = module.load_balancer_controller_irsa_role.iam_role_arn
+      service_account_role_arn = module.load_balancer_controller_irsa_role.arn
       aws_region               = local.aws_region_name
       cluster_name             = var.cluster_name
       vpc_id                   = module.cluster_vpc.vpc_id

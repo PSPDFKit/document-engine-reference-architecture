@@ -14,21 +14,22 @@ locals {
 
 module "cluster_eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 20"
+  version = "~> 21.0"
 
-  cluster_name                             = var.cluster_name
-  cluster_version                          = var.cluster_version
-  cluster_endpoint_public_access           = var.cluster_endpoint_public_access
+  name                             = var.cluster_name
+  kubernetes_version                          = var.cluster_version
+  endpoint_public_access           = var.cluster_endpoint_public_access
+  
   enable_cluster_creator_admin_permissions = true
   create_kms_key                           = true
 
-  cluster_addons = {
+  addons = {
     kube-proxy = { most_recent = true }
     coredns    = { most_recent = true }
     vpc-cni = {
       most_recent              = true
       before_compute           = true
-      service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
+      service_account_role_arn = module.vpc_cni_irsa.arn
     }
   }
 
@@ -39,18 +40,17 @@ module "cluster_eks" {
   cloudwatch_log_group_kms_key_id        = aws_kms_key.cluster_eks_logs.arn
   cloudwatch_log_group_retention_in_days = var.cluster_log_retention_days
 
-  eks_managed_node_group_defaults = local.eks_managed_node_group_defaults
   eks_managed_node_groups         = local.eks_managed_node_groups
 
   tags = {
-    "karpenter.sh/discovery" = var.cluster_name
   }
 }
 
 module "vpc_cni_irsa" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.0"
 
-  role_name             = "${var.cluster_name}-AmazonEKS-VPC-CNI-Role"
+  name                  = "${var.cluster_name}-AmazonEKS-VPC-CNI-Role"
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true
   vpc_cni_enable_ipv6   = false

@@ -50,7 +50,7 @@ data "aws_ecrpublic_authorization_token" "token" {
 
 locals {
   azs             = slice(data.aws_availability_zones.available.names, 0, 3)
-  aws_region_name = data.aws_region.current.name
+  aws_region_name = data.aws_region.current.id
   aws_account_id  = data.aws_caller_identity.current.account_id
 }
 
@@ -68,15 +68,15 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
     host                   = module.kubernetes_cluster.cluster_endpoint
     cluster_ca_certificate = base64decode(module.kubernetes_cluster.cluster_certificate_authority_data)
     token                  = data.aws_eks_cluster_auth.default.token
   }
 
-  registry {
+  registries = [{
     url      = "oci://public.ecr.aws/"
     password = data.aws_ecrpublic_authorization_token.token.password
     username = "AWS"
-  }
+  }]
 }
