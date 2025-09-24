@@ -14,14 +14,14 @@
 > This is not a production configuration or a building block. 
 > It is intended for educational use, or as a starting point for a more complete infrastructure design.
 
-This example demonstrates minimal installation of [PSPDFKit Document Engine](https://pspdfkit.com/guides/document-engine/) on 
+This example demonstrates minimal installation of [Nutrient Document Engine](https://www.nutrient.io/guides/document-engine/) on 
 [Kubernetes](https://kubernetes.io/) in AWS using Terraform.
 
 The resources deployed will include:
  * [AWS Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) cluster as Kubernetes platform
    * Addons to integrate Amazon resources for logging and load balancing
  * PostgreSQL database running on [AWS Relational Database Service](https://aws.amazon.com/rds/)
- * [PSPDFKit Document Engine](https://pspdfkit.com/guides/document-engine/)
+ * [Nutrient Document Engine](https://www.nutrient.io/guides/document-engine/)
 
 ## Prerequisites
 
@@ -85,17 +85,17 @@ Output should include deployment information:
 
 ```
 ...
-cluster_name = "pspdfkit-de-demo-fE0JX8Bf"
+cluster_name = "nutrient-de-demo-fE0JX8Bf"
 cluster_vpc_id = "vpc-0d00dfe0eee0641e4"
 ...
-document_engine_url = "http://k8s-pspdfkit-document-1828531825-23172973189273.eu-north-1.elb.amazonaws.com"
-kubeconfig_command = "aws eks update-kubeconfig --region eu-north-1 --name pspdfkit-de-demo-fsd797d --kubeconfig .kubeconfig"
+document_engine_url = "http://k8s-nutrient-document-1828531825-23172973189273.eu-north-1.elb.amazonaws.com"
+kubeconfig_command = "aws eks update-kubeconfig --region eu-north-1 --name nutrient-de-demo-fsd797d --kubeconfig .kubeconfig"
 ```
 
 Note `kubeconfig_command` output, it contains AWS CLI command to retrieve Kubernetes configuration file. It can then be used by setting `KUBECONFIG` environment variable: 
 
 ```shell
-aws eks update-kubeconfig --region eu-north-1 --name pspdfkit-de-demo-fsd797d --kubeconfig .kubeconfig
+aws eks update-kubeconfig --region eu-north-1 --name nutrient-de-demo-fsd797d --kubeconfig .kubeconfig
 export KUBECONFIG="$(pwd)/.kubeconfig"
 ```
 
@@ -103,7 +103,7 @@ This allows all range of `kubectl` and `helm` commands:
 
 ```shell
 kubectl get namespaces
-helm status -n pspdfkit-document-engine document-engine
+helm status -n nutrient-document-engine document-engine
 ```
 
 We will need the URL from 
@@ -129,7 +129,6 @@ This software is licensed under a [modified BSD license](LICENSE).
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://pspdfkit.com/support/request/
+Nutrient offers support via https://support.nutrient.io/hc/en-us/requests/new
 
-Are you [evaluating our SDK](https://pspdfkit.com/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://pspdfkit.com/sales/
-
+Are you [evaluating our SDK](https://www.nutrient.io/sdk/try)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/contact-sales?=sdk

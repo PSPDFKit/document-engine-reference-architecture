@@ -45,7 +45,7 @@ Prepare Terraform environment by setting environment variables for the Kubernete
 
 ```shell
 export TF_VAR_kubernetes_config_context="docker-desktop"
-export TF_VAR_document_engine_hostname="document-engine.pspdfkit.local"
+export TF_VAR_document_engine_hostname="document-engine.nutrient.local"
 ```
 
 > [!NOTE]
@@ -74,7 +74,7 @@ On Linux and macOS, the quickest way to do that is to edit `/etc/hosts` file:
 
 ```
 ...
-127.0.0.1 document-engine.pspdfkit.local
+127.0.0.1 document-engine.nutrient.local
 ...
 ```
 
@@ -93,7 +93,7 @@ curl http://<hostname>
 The output should look like:
 
 ```
-PSPDFKit Document Engine 1.0.0 is up and running.
+Nutrient Document Engine 1.0.0 is up and running.
 ```
 
 To access Document Engine dashboard from a web browser, follow the url `http://<hostname>/dashboard`, username is `admin` and password is `admin`.
@@ -101,7 +101,7 @@ To access Document Engine dashboard from a web browser, follow the url `http://<
 To examine the installation: 
 
 ```shell
-kubectl get pods -n pspdfkit-document-engine
+kubectl get pods -n nutrient-document-engine
 ```
 
 will give output like: 
@@ -126,7 +126,6 @@ This software is licensed under a [modified BSD license](LICENSE).
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support via https://pspdfkit.com/support/request/
+Nutrient offers support via https://support.nutrient.io/hc/en-us/requests/new
 
-Are you [evaluating our SDK](https://pspdfkit.com/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://pspdfkit.com/sales/
-
+Are you [evaluating our SDK](https://www.nutrient.io/sdk/try)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/contact-sales?=sdk

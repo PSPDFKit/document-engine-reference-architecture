@@ -80,7 +80,7 @@ curl http://<VM public IP>
 The output should look like:
 
 ```
-PSPDFKit Document Engine 1.0.0 is up and running.
+Nutrient Document Engine 1.0.0 is up and running.
 ```
 
 To access Document Engine dashboard from a web browser, follow the url `http://<VM public IP>/dashboard`, username is `admin` and password is `admin`.
@@ -119,7 +119,7 @@ This software is licensed under a [modified BSD license](LICENSE).
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support via https://pspdfkit.com/support/request/
+Nutrient offers support via https://support.nutrient.io/hc/en-us/requests/new
 
-Are you [evaluating our SDK](https://pspdfkit.com/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://pspdfkit.com/sales/
+Are you [evaluating our SDK](https://www.nutrient.io/sdk/try)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/contact-sales?=sdk
 

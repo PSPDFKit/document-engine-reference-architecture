@@ -1,7 +1,7 @@
 locals {
   document_engine_db_password_version = 1 # for rotation
   document_engine_db_password         = sensitive(random_password.document_engine_db_password.result)
-  document_engine_db_name             = "pspdfkit"
+  document_engine_db_name             = "nutrient"
 }
 
 module "document_engine_storage" {
@@ -10,7 +10,7 @@ module "document_engine_storage" {
   cluster_vpc_info = module.kubernetes_cluster.cluster_vpc_info
   database_properties = {
     identifier                   = "docengine-eks-example"
-    username                     = "pspdfkit"
+    username                     = "nutrient"
     db_name                      = local.document_engine_db_name
     ec2_instance_type            = "db.t3.micro"
     postgres_engine_version      = "15.4"

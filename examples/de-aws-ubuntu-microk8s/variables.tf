@@ -18,7 +18,7 @@ variable "additional_tags" {
 variable "environment_name" {
   type        = string
   description = "Environment name to use all over the place"
-  default     = "pspdfkit-example-microk8s"
+  default     = "nutrient-example-microk8s"
 }
 
 variable "vm_public_key" {
