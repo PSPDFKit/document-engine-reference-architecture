@@ -38,7 +38,7 @@ output "cluster_info" {
     cluster_endpoint                   = module.cluster_eks.cluster_endpoint
     cluster_version                    = module.cluster_eks.cluster_version
     cluster_certificate_authority_data = module.cluster_eks.cluster_certificate_authority_data
-    containers_log_group_prefix_ec2    = local.containers_log_group_prefix_ec2
+    containers_log_group_prefix    = local.containers_log_group_prefix
   }
 }
 

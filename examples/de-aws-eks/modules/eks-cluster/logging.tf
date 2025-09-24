@@ -14,7 +14,7 @@ resource "helm_release" "aws-for-fluent-bit" {
     templatefile("${path.module}/logging-ec2_fluentbit.values.yaml.tftpl",
       {
         aws_region         = local.aws_region_name
-        log_group_prefix   = local.containers_log_group_prefix_ec2
+        log_group_prefix   = local.containers_log_group_prefix
         log_stream_prefix  = "k-"
         log_retention_days = var.container_log_retention_days
         checksum_values    = filemd5("${path.module}/logging-ec2_fluentbit.values.yaml.tftpl")

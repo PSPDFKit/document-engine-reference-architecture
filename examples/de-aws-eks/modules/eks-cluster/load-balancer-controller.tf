@@ -13,7 +13,7 @@ module "load_balancer_controller_irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
   version = "~> 6.0"
 
-  name                                   = "${var.cluster_name}-AmazonEKS-LoadBalancerController-Role"
+  name                                   = "${var.cluster_name}-ALB-Role"
   attach_load_balancer_controller_policy = true
 
   oidc_providers = {

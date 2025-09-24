@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "kms_logging_policy" {
     condition {
       test     = "ArnLike"
       variable = "kms:EncryptionContext:aws:logs:arn"
-      values   = ["arn:aws:logs:${local.aws_region_name}:${local.aws_account_id}:*"]
+      values   = ["arn:aws:logs:${local.aws_region_name}:${local.aws_account_id}:log-group:${local.containers_log_group_prefix}/*"]
     }
   }
 }

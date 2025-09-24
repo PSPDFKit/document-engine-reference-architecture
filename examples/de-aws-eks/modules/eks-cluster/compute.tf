@@ -114,7 +114,7 @@ data "aws_iam_policy_document" "additional_node_policy" {
       "logs:putRetentionPolicy"
     ]
     resources = [
-      "arn:aws:logs:${local.aws_region_name}:${local.aws_account_id}:log-group:${local.containers_log_group_prefix_ec2}/*",
+      "arn:aws:logs:${local.aws_region_name}:${local.aws_account_id}:log-group:${local.containers_log_group_prefix}/*",
     ]
   }
 }

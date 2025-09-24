@@ -6,10 +6,10 @@
 # 
 locals {
   #
-  # Cluster log group name is hardcoded: https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/main.tf#L115
+  # Cluster log group name is hardcoded: https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/main.tf#L236
   # So we follow the pattern
   #
-  containers_log_group_prefix_ec2 = "/aws/eks/${var.cluster_name}/ec2"
+  containers_log_group_prefix = "/aws/eks/${var.cluster_name}"
 }
 
 module "cluster_eks" {
@@ -50,7 +50,7 @@ module "vpc_cni_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
   version = "~> 6.0"
 
-  name                  = "${var.cluster_name}-AmazonEKS-VPC-CNI-Role"
+  name                  = "${var.cluster_name}-CNI-Role"
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true
   vpc_cni_enable_ipv6   = false
