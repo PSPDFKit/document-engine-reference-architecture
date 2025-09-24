@@ -45,7 +45,7 @@ Prepare Terraform environment by setting environment variables for the Kubernete
 
 ```shell
 export TF_VAR_kubernetes_config_context="docker-desktop"
-export TF_VAR_document_engine_hostname="document-engine.pspdfkit.local"
+export TF_VAR_document_engine_hostname="document-engine.nutrient.local"
 ```
 
 > [!NOTE]
@@ -74,7 +74,7 @@ On Linux and macOS, the quickest way to do that is to edit `/etc/hosts` file:
 
 ```
 ...
-127.0.0.1 document-engine.pspdfkit.local
+127.0.0.1 document-engine.nutrient.local
 ...
 ```
 
@@ -101,7 +101,7 @@ To access Document Engine dashboard from a web browser, follow the url `http://<
 To examine the installation: 
 
 ```shell
-kubectl get pods -n pspdfkit-document-engine
+kubectl get pods -n nutrient-document-engine
 ```
 
 will give output like: 

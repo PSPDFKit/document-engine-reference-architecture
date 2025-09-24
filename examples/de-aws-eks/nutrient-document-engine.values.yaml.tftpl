@@ -85,7 +85,7 @@ updateStrategy:
     maxSurge: 1
 
 podLabels: 
-  pspdfkit-document-engine: example-for-eks
+  nutrient-document-engine: example-for-eks
 
 podAnnotations:
   checksum/values-template: ${checksum_values}
@@ -95,7 +95,7 @@ topologySpreadConstraints:
   - labelSelector:
       matchLabels:
         app.kubernetes.io/name: ${release_name}
-        pspdfkit-document-engine: example-for-eks
+        nutrient-document-engine: example-for-eks
     topologyKey: topology.kubernetes.io/zone
     maxSkew: 1
     whenUnsatisfiable: ScheduleAnyway

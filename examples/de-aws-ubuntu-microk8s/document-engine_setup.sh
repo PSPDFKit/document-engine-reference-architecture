@@ -28,16 +28,16 @@ microk8s kubectl apply -f tls/local.ClusterIssuer.yaml
 
 # Document Engine
 
-microk8s kubectl create namespace pspdfkit
-microk8s kubectl config set-context --current --namespace=pspdfkit
+microk8s kubectl create namespace nutrient
+microk8s kubectl config set-context --current --namespace=nutrient
 
-microk8s helm repo add pspdfkit https://pspdfkit.github.io/helm-charts
+microk8s helm repo add nutrient https://pspdfkit.github.io/helm-charts
 microk8s helm repo update
 
 microk8s kubectl apply -f signing-service.Certificate.yaml
 
-microk8s helm upgrade --install -n pspdfkit \
-  document-engine pspdfkit/document-engine \
+microk8s helm upgrade --install -n nutrient \
+  document-engine nutrient/document-engine \
   -f document-engine.values.yaml \
-  --set pspdfkit.signingService.url=http://signing-service.pspdfkit.svc.cluster.local:80
-
+  --set nutrient.signingService.url=http://signing-service.nutrient.svc.cluster.local:80
+nutrient

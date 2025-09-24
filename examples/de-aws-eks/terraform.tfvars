@@ -3,7 +3,7 @@
 document_engine = {
   activation_key     = ""
   logging_level      = "debug"
-  namespace_name     = "pspdfkit-document-engine"
+  namespace_name     = "nutrient-document-engine"
   helm_release_name  = "document-engine"
   helm_chart_version = "" # get the latest
 }
@@ -14,10 +14,10 @@ aws_region = "eu-north-1"
 
 # Names and resources
 
-environment_name = "pspdfkit-de-demo"
+environment_name = "nutrient-de-demo"
 additional_tags = {
-  "pspdfkit:environment" = "pspdfkit-de-demo"
-  "pspdfkit:demo"        = "true"
+  "nutrient:environment" = "nutrient-de-demo"
+  "nutrient:demo"        = "true"
 }
 
 cluster_cidr = "10.0.0.0/16"

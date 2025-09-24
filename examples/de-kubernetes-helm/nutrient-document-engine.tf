@@ -12,18 +12,18 @@ resource "helm_release" "document_engine" {
   namespace        = kubernetes_namespace.document_engine.metadata[0].name
   create_namespace = false
   values = [
-    templatefile("${path.module}/pspdfkit-document-engine.values.yaml.tftpl",
+    templatefile("${path.module}/nutrient-document-engine.values.yaml.tftpl",
       {
         activation_key       = var.document_engine.activation_key
         log_level            = var.document_engine.logging_level
         hostname             = var.document_engine_hostname
         db_host              = "${var.document_engine.helm_release_name}-postgresql.${var.document_engine.namespace_name}.svc.cluster.local"
-        db_name              = "pspdfkit"
+        db_name              = "nutrient"
         db_postgres_password = "despair"
         release_name         = var.document_engine.helm_release_name
         jwt_public_key       = file("${path.module}/JWT_PUBLIC_KEY.pem")
-        checksum_values      = filemd5("${path.module}/pspdfkit-document-engine.values.yaml.tftpl")
-        checksum_code        = filemd5("${path.module}/pspdfkit-document-engine.tf")
+        checksum_values      = filemd5("${path.module}/nutrient-document-engine.values.yaml.tftpl")
+        checksum_code        = filemd5("${path.module}/nutrient-document-engine.tf")
       }
     )
   ]

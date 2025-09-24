@@ -60,7 +60,7 @@ resource "aws_instance" "vm" {
   tags = merge(
     var.additional_tags,
     {
-      Name = "pspdfkit-demo-instance"
+      Name = "nutrient-demo-instance"
     }
   )
 }

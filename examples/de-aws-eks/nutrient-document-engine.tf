@@ -34,7 +34,7 @@ resource "helm_release" "document_engine" {
   namespace        = kubernetes_namespace.document_engine.metadata[0].name
   create_namespace = false
   values = [
-    templatefile("${path.module}/pspdfkit-document-engine.values.yaml.tftpl",
+    templatefile("${path.module}/nutrient-document-engine.values.yaml.tftpl",
       {
         activation_key    = var.document_engine.activation_key
         log_level         = var.document_engine.logging_level
@@ -47,8 +47,8 @@ resource "helm_release" "document_engine" {
         rds_ca_path       = "rds-ca.pem"
         rds_ca_config_map = kubernetes_config_map.rds_ca.metadata[0].name
         jwt_public_key    = file("${path.module}/JWT_PUBLIC_KEY.pem")
-        checksum_values   = filemd5("${path.module}/pspdfkit-document-engine.values.yaml.tftpl")
-        checksum_code     = filemd5("${path.module}/pspdfkit-document-engine.tf")
+        checksum_values   = filemd5("${path.module}/nutrient-document-engine.values.yaml.tftpl")
+        checksum_code     = filemd5("${path.module}/nutrient-document-engine.tf")
       }
     )
   ]
