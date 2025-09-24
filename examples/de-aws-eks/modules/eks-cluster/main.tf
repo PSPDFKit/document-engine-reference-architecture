@@ -16,10 +16,10 @@ module "cluster_eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
 
-  name                             = var.cluster_name
-  kubernetes_version                          = var.cluster_version
-  endpoint_public_access           = var.cluster_endpoint_public_access
-  
+  name                   = var.cluster_name
+  kubernetes_version     = var.cluster_version
+  endpoint_public_access = var.cluster_endpoint_public_access
+
   enable_cluster_creator_admin_permissions = true
   create_kms_key                           = true
 
@@ -40,7 +40,7 @@ module "cluster_eks" {
   cloudwatch_log_group_kms_key_id        = aws_kms_key.cluster_eks_logs.arn
   cloudwatch_log_group_retention_in_days = var.cluster_log_retention_days
 
-  eks_managed_node_groups         = local.eks_managed_node_groups
+  eks_managed_node_groups = local.eks_managed_node_groups
 
   tags = {
   }

@@ -20,7 +20,7 @@ locals {
   cluster_oidc_provider_arn          = var.cluster_info["cluster_oidc_provider_arn"]
   cluster_endpoint                   = var.cluster_info["cluster_endpoint"]
   cluster_certificate_authority_data = var.cluster_info["cluster_certificate_authority_data"]
-  containers_log_group_prefix    = var.cluster_info["containers_log_group_prefix"]
+  containers_log_group_prefix        = var.cluster_info["containers_log_group_prefix"]
 }
 
 variable "database_properties" {

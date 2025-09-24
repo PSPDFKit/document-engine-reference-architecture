@@ -30,6 +30,6 @@ cluster_nodes_count       = 1
 
 # Versions
 
-cluster_version                                 = "1.30"
+cluster_version                                 = "1.33"
 aws_for_fluent_bit_helm_chart_version           = "0.1.34"
 aws_load_balancer_controller_helm_chart_version = "1.9.0"
