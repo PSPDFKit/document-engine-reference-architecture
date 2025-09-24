@@ -5,7 +5,8 @@ document_engine = {
   logging_level      = "debug"
   namespace_name     = "nutrient-document-engine"
   helm_release_name  = "document-engine"
-  helm_chart_version = "" # get the latest
+  # Latest by default, uncomment for specific version, see https://github.com/PSPDFKit/helm-charts/blob/master/charts/document-engine/CHANGELOG.md
+  # helm_chart_version = ""
 }
 
 # AWS
