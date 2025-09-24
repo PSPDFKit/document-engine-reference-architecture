@@ -13,7 +13,7 @@ module "document_engine_storage" {
     username                     = "nutrient"
     db_name                      = local.document_engine_db_name
     ec2_instance_type            = "db.t3.micro"
-    postgres_engine_version      = "15.4"
+    postgres_engine_version      = "15.14"
     postgres_parameter_family    = "postgres15"
     publicly_accessible          = false
     preferred_maintenance_window = "sun:05:00-sun:06:00"
