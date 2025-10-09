@@ -1,12 +1,12 @@
 # Document Engine example - Deploying to OrbStack with Kubernetes
 
-- [Document Engine example - Deploying to OrbStack with Kubernetes](#document-engine-example---deploying-to-orbstack-with-kubernetes)
-  - [Prerequisites](#prerequisites)
-  - [Getting started](#getting-started)
-  - [API usage examples](#api-usage-examples)
-  - [Cleanup](#cleanup)
-  - [License](#license)
-  - [Support, issues and questions](#support-issues-and-license-questions)
+- [About OrbStack](#about-orbstack)
+- [Prerequisites](#prerequisites)
+- [Getting started](#getting-started)
+- [API usage examples](#api-usage-examples)
+- [Support](#support)
+- [License](#license)
+- [Contributing](#contributing)
 
 > This example demonstrates a minimal installation of [Nutrient Document Engine](https://www.nutrient.io/guides/document-engine/) on a local Kubernetes cluster using OrbStack.
 
@@ -22,9 +22,9 @@ This example uses OrbStack’s built-in Kubernetes support to deploy Document En
 
 ## Prerequisites
 
-* [OrbStack](https://orbstack.dev) installed with Kubernetes enabled
-* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/) - Kubernetes command-line tool
-* [Helm](https://helm.sh/docs/intro/install/) - Kubernetes package manager
+- [OrbStack](https://orbstack.dev) installed with Kubernetes enabled
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/) - Kubernetes command-line tool
+- [Helm](https://helm.sh/docs/intro/install/) - Kubernetes package manager
 
 You can install kubectl and Helm on macOS using Homebrew:
 
