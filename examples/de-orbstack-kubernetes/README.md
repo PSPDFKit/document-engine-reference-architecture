@@ -37,7 +37,7 @@ brew install kubectl helm
 1. Clone this repository and navigate to the example directory:
 
 ```shell
-git clone https://github.com/nutrient/document-engine-reference-architecture.git
+git clone https://github.com/PSPDFKit/document-engine-reference-architecture.git
 cd document-engine-reference-architecture/examples/de-orbstack-kubernetes
 ```
 
