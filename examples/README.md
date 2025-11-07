@@ -17,6 +17,7 @@
 
 * [Deploying to the locally configured Kubernetes](./de-kubernetes-helm/)
 * [Deploying to OrbStack with Kubernetes](./de-orbstack-kubernetes/)
+* [Deploying to Google Kubernetes Engine](./de-google-kubernetes-engine/)
 
 ### Amazon Web Services
 
