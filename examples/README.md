@@ -11,11 +11,13 @@
 > The examples are provided purely for educational purpose. 
 > They should never be used in production configuration or reused as an unchanged building block. 
 
-## Deployment examples 
+## Deployment examples
 
 ### Any Kubernetes cluster or Docker Desktop
 
 * [Deploying to the locally configured Kubernetes](./de-kubernetes-helm/)
+* [Deploying to OrbStack with Kubernetes](./de-orbstack-kubernetes/)
+* [Deploying to Google Kubernetes Engine](./de-google-kubernetes-engine/)
 
 ### Amazon Web Services
 
