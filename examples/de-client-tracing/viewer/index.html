@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Client tracing viewer</title>
+    <style>
+      html,
+      body,
+      #viewer {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viewer"></div>
+    <script>
+      // Usage: index.html?user=alice[&serverUrl=http://localhost:8080/]
+      //
+      // `./mint-jwt.sh --write <document-id> <user-id>` writes the user's JWT to
+      // tokens/<user-id>.json. In a real integration, your backend returns it.
+      const params = new URLSearchParams(location.search);
+      const serverUrl = params.get("serverUrl") || "http://localhost:8080/";
+
+      async function start() {
+        const response = await fetch(`tokens/${encodeURIComponent(params.get("user"))}.json`, {
+          cache: "no-store",
+        });
+        if (!response.ok) {
+          throw new Error(`No token for this user. Run ./mint-jwt.sh --write <document-id> <user-id> first.`);
+        }
+        const { documentId, jwt } = await response.json();
+
+        // Document Engine serves the Web SDK bundle that matches its own version.
+        const script = document.createElement("script");
+        script.src = new URL("nutrient-viewer.js", serverUrl).href;
+        script.onload = () =>
+          NutrientViewer.load({
+            container: "#viewer",
+            serverUrl,
+            documentId,
+            authPayload: { jwt },
+            instant: true,
+          });
+        document.head.appendChild(script);
+      }
+
+      start();
+    </script>
+  </body>
+</html>

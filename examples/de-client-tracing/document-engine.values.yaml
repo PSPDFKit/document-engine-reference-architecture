@@ -1,0 +1,95 @@
+# Document Engine Helm chart values for the client tracing example.
+# Based on ../de-orbstack-kubernetes/document-engine.values.yaml, with the
+# Gateway API enabled and structured logging turned on.
+
+# Leave empty to run in trial mode, or provide your activation key.
+documentEngineLicense:
+  activationKey: ""
+
+apiAuth:
+  # Use 'Authorization: Token token=secret' for API requests.
+  apiToken: secret
+  # Clients authenticate with JWTs signed by `simulate-clients.sh`.
+  # `setup.sh` generates the key pair and passes the public key with
+  # `--set-file apiAuth.jwt.publicKey=keys/jwt-public.pem`.
+  jwt:
+    enabled: true
+    algorithm: RS256
+
+config:
+  trustedProxies: default
+  # `PSPDFKIT_WORKER_POOL_SIZE`. The chart default of 16 PDF workers doesn't fit
+  # the memory limit below on a laptop; 4 is plenty for this example.
+  workerPoolSize: 4
+  # `SERVER_REQUEST_TIMEOUT`. Keep it below the proxy timeout in gateway.yaml.
+  requestTimeoutSeconds: 180
+  workerTimeoutSeconds: 180
+
+documentSigningService:
+  enabled: false
+
+database:
+  enabled: true
+  engine: postgres
+  migrationJob:
+    enabled: false
+  postgres:
+    port: 5432
+    username: postgres
+    tls:
+      enabled: false
+
+assetStorage:
+  backendType: built-in
+  backendFallback:
+    enabled: false
+
+dashboard:
+  auth:
+    username: admin
+    password: admin
+
+observability:
+  log:
+    # `debug` adds the record IDs and reasons of rejected Instant changes.
+    # It's verbose and costs performance; use `info` in production and switch
+    # to `debug` only while you investigate.
+    level: debug
+    # One JSON object per line, so the logs can be joined with the gateway's.
+    structured: true
+    structuredFlatten: true
+
+replicaCount: 1
+
+resources:
+  limits:
+    cpu: "2"
+    memory: 4Gi
+  requests:
+    cpu: "500m"
+    memory: 512Mi
+
+ingress:
+  enabled: false
+
+# The chart creates the Gateway and HTTPRoute; gateway.yaml configures Envoy.
+gateway:
+  enabled: true
+  gateway:
+    enabled: true
+    gatewayClassName: envoy-gateway
+    listeners:
+      - name: http
+        protocol: HTTP
+        port: 80
+    infrastructure:
+      parametersRef:
+        group: gateway.envoyproxy.io
+        kind: EnvoyProxy
+        name: client-tracing
+
+cloudNativePG:
+  enabled: true
+  clusterSpec:
+    storage:
+      size: 256Mi

@@ -1,0 +1,70 @@
+# Envoy Gateway setup in front of Document Engine.
+#
+# The Document Engine Helm chart creates the Gateway and HTTPRoute itself
+# (see `gateway` in document-engine.values.yaml). This file adds the parts
+# specific to Envoy Gateway:
+#
+# - a GatewayClass for Envoy Gateway,
+# - an EnvoyProxy that writes one JSON access log line per request, including
+#   the headers every Nutrient SDK sends to identify itself,
+# - a BackendTrafficPolicy that raises Envoy's default 15 second route timeout,
+#   so Instant sync long-poll requests aren't cut off.
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: envoy-gateway
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: client-tracing
+  namespace: document-engine
+spec:
+  telemetry:
+    accessLog:
+      settings:
+        - format:
+            type: JSON
+            json:
+              time: "%START_TIME%"
+              # Envoy generates an `x-request-id` for every request and forwards it.
+              # Document Engine uses it as its own `request_id`, so its log lines
+              # for this request carry the same value.
+              request_id: "%REQ(X-REQUEST-ID)%"
+              method: "%REQ(:METHOD)%"
+              path: "%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)%"
+              status: "%RESPONSE_CODE%"
+              response_flags: "%RESPONSE_FLAGS%"
+              duration_ms: "%DURATION%"
+              bytes_received: "%BYTES_RECEIVED%"
+              bytes_sent: "%BYTES_SENT%"
+              # Sent by every Nutrient SDK: `ios`, `android` or `web`.
+              platform: "%REQ(PSPDFKIT-PLATFORM)%"
+              # Sent by every Nutrient SDK, e.g. `protocol=5, client=1.9.0, client-git=...`.
+              sdk_version: "%REQ(PSPDFKIT-VERSION)%"
+              user_agent: "%REQ(USER-AGENT)%"
+              client_ip: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+          sinks:
+            - type: File
+              file:
+                path: /dev/stdout
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: document-engine-timeouts
+  namespace: document-engine
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: document-engine
+  timeout:
+    http:
+      # Keep this above Document Engine's `SERVER_REQUEST_TIMEOUT`
+      # (`config.requestTimeoutSeconds` in the Helm chart), so that
+      # Document Engine, not the proxy, ends long-running requests.
+      requestTimeout: 200s
